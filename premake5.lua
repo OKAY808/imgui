@@ -2,6 +2,9 @@ project "ImGui"
     kind "StaticLib"
     language "C++"
 
+    targetdir ("%{prj.location}/bin/" .. outputdir)
+    objdir ("%{prj.location}/bin-int/" .. outputdir)
+
     files 
     {
         "imguiconfig.h",
