@@ -4024,7 +4024,7 @@ bool ImGui::InputTextEx(const char* label, const char* hint, char* buf, int buf_
         item_status_flags = g.LastItemData.StatusFlags;
     }
     const bool hovered = ItemHoverable(frame_bb, id);
-    if (hovered)
+    if (hovered && !(flags & ImGuiInputTextFlags_ReadOnly))
         g.MouseCursor = ImGuiMouseCursor_TextInput;
 
     // We are only allowed to access the state if we are already the active widget.
@@ -4637,7 +4637,7 @@ bool ImGui::InputTextEx(const char* label, const char* hint, char* buf, int buf_
 
     // Render text. We currently only render selection when the widget is active or while scrolling.
     // FIXME: We could remove the '&& render_cursor' to keep rendering selection when inactive.
-    if (render_cursor || render_selection)
+    if ((render_cursor || render_selection) && !(flags & ImGuiInputTextFlags_ReadOnly))
     {
         IM_ASSERT(state != NULL);
         if (!is_displaying_hint)
@@ -8404,7 +8404,7 @@ bool    ImGui::TabItemEx(ImGuiTabBar* tab_bar, const char* label, bool* p_open, 
         flags |= ImGuiTabItemFlags_NoCloseWithMiddleMouseButton;
 
     // Render tab label, process close button
-    const ImGuiID close_button_id = p_open ? GetIDWithSeed("#CLOSE", NULL, docked_window ? docked_window->ID : id) : 0;
+    const ImGuiID close_button_id = p_open && docked_window->DockNode->Windows.Size > 1 ? GetIDWithSeed("#CLOSE", NULL, docked_window ? docked_window->ID : id) : 0;
     bool just_closed;
     bool text_clipped;
     TabItemLabelAndCloseButton(display_draw_list, bb, tab_just_unsaved ? (flags & ~ImGuiTabItemFlags_UnsavedDocument) : flags, tab_bar->FramePadding, label, id, close_button_id, tab_contents_visible, &just_closed, &text_clipped);
