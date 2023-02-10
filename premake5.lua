@@ -14,7 +14,10 @@ project "ImGui"
         "imgui_widgets.cpp",
         "imstb_rectpack.h",
         "imstb_textedit.h",
-        "imstb_truetype.h"
+        "imstb_truetype.h",
+        "imgui_stacklayout.cpp",
+        "imgui_stacklayout.h",
+        "imgui_stacklayout_internal.h"
     }
 
     filter "system:windows"
