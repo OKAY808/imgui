@@ -10352,6 +10352,12 @@ void ImGui::Unindent(float indent_w)
     window->DC.CursorPos.x = window->Pos.x + window->DC.Indent.x + window->DC.ColumnsOffset.x;
 }
 
+void ImGui::SetNextItemInnerWidth(float inner_width)
+{
+    ImGuiContext& g = *GImGui;
+    g.NextItemData.InnerWidth = inner_width;
+}
+
 // Affect large frame+labels widgets only.
 void ImGui::SetNextItemWidth(float item_width)
 {
