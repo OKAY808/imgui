@@ -4114,7 +4114,13 @@ bool ImGui::InputTextEx(const char* label, const char* hint, char* buf, int buf_
     const ImRect total_bb(frame_bb.Min, frame_bb.Min + total_size);
 
     ImGuiWindow* draw_window = window;
-    ImVec2 inner_size = { g.NextItemData.InnerWidth > 0.0f ? g.NextItemData.InnerWidth : frame_size.x, frame_size.y };
+
+    float inner_width;
+    if (g.NextItemData.Flags & ImGuiNextItemDataFlags_HasInnerWidth)
+        inner_width = g.NextItemData.InnerWidth;
+    else
+        inner_width = frame_size.x;
+    ImVec2 inner_size = { inner_width, frame_size.y };
     ImGuiItemStatusFlags item_status_flags = 0;
     ImGuiLastItemData item_data_backup;
     if (is_multiline)

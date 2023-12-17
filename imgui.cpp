@@ -10355,6 +10355,7 @@ void ImGui::Unindent(float indent_w)
 void ImGui::SetNextItemInnerWidth(float inner_width)
 {
     ImGuiContext& g = *GImGui;
+    g.NextItemData.Flags |= ImGuiNextItemDataFlags_HasInnerWidth;
     g.NextItemData.InnerWidth = inner_width;
 }
 
