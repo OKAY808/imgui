@@ -2,6 +2,8 @@ project "ImGui"
     kind "StaticLib"
     language "C++"
 
+    architecture "x86_64"
+
     targetdir ("%{prj.location}/bin/" .. outputdir)
     objdir ("%{prj.location}/bin-int/" .. outputdir)
 
